@@ -2,14 +2,14 @@ import { type NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
 import { SignIn, SignOutButton, useUser } from "@clerk/clerk-react";
-import {
-  SignInButton,
-} from "@clerk/nextjs";
+import { SignInButton } from "@clerk/nextjs";
+import Image from "next/image";
 
 import { api } from "~/utils/api";
 
 const Home: NextPage = () => {
   const user = useUser();
+  const { data } = api.exercises.getAll.useQuery();
 
   return (
     <>
@@ -19,10 +19,19 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c]">
-        
         {!user.isSignedIn && <SignInButton />}
-        {!!user.isSignedIn && <SignOutButton/>}
+        {!!user.isSignedIn && <SignOutButton />}
         <SignIn path="/sign-in" routing="path" signUpUrl="/sign-up" />
+        <section>
+          {data?.map((exercise) => (
+            <article className="text-white" key={exercise.id}>
+              <img className="w-[120px]" src={exercise.image} alt={exercise.name}/>
+              <h2>{exercise.name}</h2>
+              <p>{exercise.description}</p>
+              <a className="underline" href={exercise.demo}>See Demo</a>
+              </article>
+          ))}
+        </section>
       </main>
     </>
   );
