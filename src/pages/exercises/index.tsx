@@ -30,8 +30,11 @@ const ExercisesPage = () => {
 
       {/* Exercise List */}
       <section>
-        {data?.map((exercise) => (
-          <ExerciseCard exercise={exercise} />
+        {data?.map((exerciseWithAuthor) => (
+          <ExerciseCard
+            {...exerciseWithAuthor}
+            key={exerciseWithAuthor.exercise.id}
+          />
         ))}
       </section>
     </main>
