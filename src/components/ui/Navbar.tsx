@@ -1,22 +1,23 @@
 import React from "react";
 import Link from "next/link";
-import { SignIn, SignOutButton, useUser } from "@clerk/clerk-react";
+import { SignOutButton, useUser } from "@clerk/clerk-react";
 import { SignInButton } from "@clerk/nextjs";
 
 const Navbar = () => {
   const user = useUser();
 
   return (
-    <nav className="flex justify-between border-b border-slate-400 bg-indigo-900 p-4">
+    <nav className="flex items-center justify-between border-b border-slate-400 bg-indigo-900 p-4">
       <header className="cursor-pointer">
-        <h1>LOGO</h1>
+        <Link href="/">
+          <h1 className="text-xl font-bold">exercises-api</h1>
+        </Link>
       </header>
-      <ul className="flex gap-8">
-        <Link href="/">Link</Link>
-        <Link href="/">Link</Link>
-        {!user.isSignedIn && <SignInButton />}
+      <ul className="flex gap-8 font-semibold">
+        {!!user.isSignedIn && <Link href="/dashboard">Dashboard</Link>}
+        {!!user.isSignedIn && <Link href="/exercises">Exercises</Link>}
         {!!user.isSignedIn && <SignOutButton />}
-        <SignIn path="/sign-in" routing="path" signUpUrl="/sign-up" />
+        {!user.isSignedIn && <SignInButton />}
       </ul>
     </nav>
   );
