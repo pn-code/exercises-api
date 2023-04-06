@@ -7,7 +7,7 @@ const CreateExerciseWizard = () => {
 
   return (
     <form className="absolute inset-0 flex h-screen flex-col justify-center gap-2 bg-slate-900 px-2 lg:items-center">
-      <section className="flex flex-col gap-2 pb-5 lg:pb-0">
+      <section className="flex flex-col gap-2 pt-10 lg:pt-4">
         <section className="flex items-center gap-2">
           <img
             className="h-12 w-12 rounded-full"
@@ -24,8 +24,8 @@ const CreateExerciseWizard = () => {
         <textarea
           name=""
           id=""
-          cols="30"
-          rows="10"
+          cols={30}
+          rows={10}
           placeholder="Describe exercise..."
         />
 
