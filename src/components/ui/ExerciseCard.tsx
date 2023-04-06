@@ -1,5 +1,9 @@
 import Image from "next/image";
 import type { RouterOutputs } from "~/utils/api";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime"
+
+dayjs.extend(relativeTime)
 
 type ExerciseWithAuthor = RouterOutputs["exercises"]["getAll"][number];
 
@@ -18,7 +22,7 @@ const ExerciseCard = (props: ExerciseWithAuthor) => {
       <section className="flex flex-col gap-2">
         <h2 className="inline text-lg font-semibold">{exercise.name}</h2>
         <p>{exercise.description}</p>
-        <a className="underline" href={exercise.demo}>
+        <a className="underline" href={exercise.demo} rel="noreferrer" target="_blank">
           See Demo
         </a>
         <footer className="flex gap-1">
@@ -30,7 +34,7 @@ const ExerciseCard = (props: ExerciseWithAuthor) => {
             width={20}
           />
           <span className="block text-sm text-amber-300">
-            {author.fullName}
+            {`${author.fullName} · ${dayjs(exercise.createdAt).fromNow()}`}
           </span>
         </footer>
       </section>
