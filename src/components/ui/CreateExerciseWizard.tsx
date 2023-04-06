@@ -1,5 +1,6 @@
 import { useUser } from "@clerk/nextjs";
 import React from "react";
+import Image from "next/image";
 
 const CreateExerciseWizard = () => {
   const { user } = useUser();
@@ -9,8 +10,10 @@ const CreateExerciseWizard = () => {
     <form className="absolute inset-0 flex h-screen flex-col justify-center gap-2 bg-slate-900 px-2 lg:items-center">
       <section className="flex flex-col gap-2 pt-10 lg:pt-4">
         <section className="flex items-center gap-2">
-          <img
-            className="h-12 w-12 rounded-full"
+          <Image
+            className="rounded-full"
+            width={30}
+            height={30}
             src={user.profileImageUrl}
             alt="Profile Image"
           />
