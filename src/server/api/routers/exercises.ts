@@ -8,7 +8,7 @@ import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 const filterUserForClient = (user: User) => {
   return {
     id: user.id,
-    fullName: `${user.firstName} ${user.lastName}`,
+    fullName: `${user.firstName!} ${user.lastName!}`,
     profileImageUrl: user.profileImageUrl,
   };
 };
