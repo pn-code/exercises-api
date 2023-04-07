@@ -1,26 +1,31 @@
 import { useState } from "react";
 import CreateExerciseWizard from "~/components/ui/CreateExerciseWizard";
-import ExerciseCard from "~/components/ui/ExerciseCard";
 import { api } from "~/utils/api";
+import { useUser } from "@clerk/nextjs";
+import Feed from "~/components/ui/Feed";
 
 const ExercisesPage = () => {
   const [openExerciseWizard, setOpenExerciseWizard] = useState<boolean>(false);
-  const { data, isLoading } = api.exercises.getAll.useQuery();
 
-  if (isLoading) return <div>Loading...</div>;
-  if (!data) return <div>Something went wrong</div>;
+  const { isLoaded: userLoaded, isSignedIn } = useUser();
+
+  // Start fetching data when page is requested...
+  api.exercises.getAll.useQuery();
+
+  // Return empty div if user isn't loaded...
+  if (!userLoaded) return <div />;
 
   return (
     <main>
       <header className="flex items-center justify-between">
         <h2 className="text-3xl">
-          {openExerciseWizard ? "Create Exercise" : "Exercise List"}
+          {isSignedIn && openExerciseWizard ? "Create Exercise" : "Exercise List"}
         </h2>
         <button
           onClick={() => setOpenExerciseWizard((open) => !open)}
           className="rounded-md bg-indigo-700 p-2 font-semibold hover:bg-indigo-600"
         >
-          {openExerciseWizard ? "Exercise List" : "Create Exercise"}
+          {isSignedIn && openExerciseWizard ? "Exercise List" : "Create Exercise"}
         </button>
       </header>
 
@@ -28,15 +33,7 @@ const ExercisesPage = () => {
         {openExerciseWizard && <CreateExerciseWizard />}
       </section>
 
-      {/* Exercise List */}
-      <section>
-        {data?.map((exerciseWithAuthor) => (
-          <ExerciseCard
-            {...exerciseWithAuthor}
-            key={exerciseWithAuthor.exercise.id}
-          />
-        ))}
-      </section>
+      <Feed />
     </main>
   );
 };
