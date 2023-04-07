@@ -58,7 +58,7 @@ export const exercisesRouter = createTRPCRouter({
       })
     )
     .mutation(async ({ ctx, input }) => {
-      const authorId = ctx.currentUser.id;
+      const authorId = ctx.userId;
 
       const exercise = await ctx.prisma.exercises.create({
         data: {
