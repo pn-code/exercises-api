@@ -1,7 +1,7 @@
 import { type AppType } from "next/app";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Toaster } from "react-hot-toast";
-import Navbar from "~/components/ui/Navbar";
+import Navbar from "~/components/Navbar";
 import { api } from "~/utils/api";
 import "~/styles/globals.css";
 

@@ -1,9 +1,9 @@
 import { useState } from "react";
 import Head from "next/head";
-import CreateExerciseWizard from "~/components/ui/CreateExerciseWizard";
+import CreateExerciseWizard from "~/components/CreateExerciseWizard";
 import { api } from "~/utils/api";
 import { useUser } from "@clerk/nextjs";
-import Feed from "~/components/ui/Feed";
+import Feed from "~/components/Feed";
 
 const ExercisesPage = () => {
   const [openExerciseWizard, setOpenExerciseWizard] = useState<boolean>(false);

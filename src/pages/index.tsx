@@ -16,15 +16,14 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="flex flex-col h-[calc(100vh-200px)] px-2 pt-[7%] gap-8 items-center">
-
+      <main className="flex h-[calc(100vh-200px)] flex-col items-center gap-8 px-2 pt-[7%]">
         <header className="flex flex-col items-center gap-8">
           <h1 className="text-3xl font-bold text-amber-300 lg:text-5xl">
             Easily access exercises
           </h1>
           <p className="max-w-xl text-center text-lg font-semibold lg:text-xl">
-            Elevate your fitness projects by providing comprehensive resistance
-            and cardiovascular exercises to your users.
+            Elevate your fitness with our comprehensive resistance and
+            cardiovascular exercises.
           </p>
         </header>
 
@@ -36,7 +35,7 @@ const Home: NextPage = () => {
 
         <Link
           className="w-full max-w-[510px] rounded-lg bg-indigo-900 p-4 text-center text-lg font-semibold hover:bg-indigo-600"
-          href="/"
+          href="/exercises"
         >
           Get Started
         </Link>
