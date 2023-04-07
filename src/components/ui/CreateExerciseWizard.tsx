@@ -1,11 +1,13 @@
 import React, { useState } from "react";
+import toast from "react-hot-toast";
 import { api } from "~/utils/api";
+import LoadingSpinner from "./LoadingSpinner";
 
 interface Props {
   closeExerciseWizard: () => void;
 }
 
-const CreateExerciseWizard: React.FC<Props> = ({ closeExerciseWizard}) => {
+const CreateExerciseWizard: React.FC<Props> = ({ closeExerciseWizard }) => {
   // INPUTS
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -19,6 +21,9 @@ const CreateExerciseWizard: React.FC<Props> = ({ closeExerciseWizard}) => {
     api.exercises.create.useMutation({
       onSuccess: () => {
         closeExerciseWizard();
+      },
+      onError: (e) => {
+        toast.error("Please make sure all fields are properly filled in.");
       },
     });
 
@@ -37,6 +42,7 @@ const CreateExerciseWizard: React.FC<Props> = ({ closeExerciseWizard}) => {
           value={name}
           onChange={(e) => setName(e.target.value)}
           disabled={isCreatingExercise}
+          required
         />
 
         <label htmlFor="desc">Description</label>
@@ -49,6 +55,7 @@ const CreateExerciseWizard: React.FC<Props> = ({ closeExerciseWizard}) => {
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           disabled={isCreatingExercise}
+          required
         />
 
         <label htmlFor="type">Exercise Type</label>
@@ -58,6 +65,7 @@ const CreateExerciseWizard: React.FC<Props> = ({ closeExerciseWizard}) => {
           value={type}
           onChange={(e) => setType(e.target.value)}
           disabled={isCreatingExercise}
+          required
         >
           <option value="cardio">Cardiovascular</option>
           <option value="resistance">Resistance</option>
@@ -70,6 +78,7 @@ const CreateExerciseWizard: React.FC<Props> = ({ closeExerciseWizard}) => {
           value={primaryTarget}
           onChange={(e) => setPrimaryTarget(e.target.value)}
           disabled={isCreatingExercise}
+          required
         >
           <option value="cardio">Cardio</option>
           <option value="neck">Neck</option>
@@ -97,6 +106,7 @@ const CreateExerciseWizard: React.FC<Props> = ({ closeExerciseWizard}) => {
           value={image}
           onChange={(e) => setImage(e.target.value)}
           disabled={isCreatingExercise}
+          required
         />
 
         <label htmlFor="">Demo URL</label>
@@ -106,14 +116,22 @@ const CreateExerciseWizard: React.FC<Props> = ({ closeExerciseWizard}) => {
           value={demo}
           onChange={(e) => setDemo(e.target.value)}
           disabled={isCreatingExercise}
+          required
         />
 
         <button
+          type="submit"
           onClick={handleExerciseCreation}
           disabled={isCreatingExercise}
-          className="mt-2 rounded-md bg-indigo-900 p-4"
+          className="mt-2 rounded-md bg-indigo-800 p-4 hover:bg-indigo-600 disabled:bg-slate-100"
         >
-          Submit
+          {isCreatingExercise ? (
+            <div className="flex justify-center">
+              <LoadingSpinner size={30} />
+            </div>
+          ) : (
+            "Submit"
+          )}
         </button>
       </section>
     </form>
