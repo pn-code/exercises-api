@@ -9,8 +9,11 @@ const ExerciseCard = (props: ExerciseWithAuthor) => {
   const { exercise, author } = props;
 
   return (
-    <article className="flex gap-4 px-2 text-white items-center" key={exercise.id}>
-      <div className="relative flex flex-column h-48 w-full items-start justify-start flex-1">
+    <article
+      className="flex items-center gap-4 px-2 text-white"
+      key={exercise.id}
+    >
+      <div className="flex-column relative flex h-48 w-full flex-1 items-start justify-start">
         <Image
           className=""
           src={exercise.image}
@@ -20,11 +23,12 @@ const ExerciseCard = (props: ExerciseWithAuthor) => {
         />
       </div>
 
-      <section className="flex flex-col gap-2 flex-[3]">
+      <section className="flex flex-[3] flex-col gap-2">
         <h2 className="inline text-lg font-semibold">{exercise.name}</h2>
+        <span className="text-sm text-slate-300">Primarily targets the {exercise.primaryTarget}</span>
         <p>{exercise.description}</p>
         <a
-          className="underline w-20"
+          className="w-20 underline"
           href={exercise.demo}
           rel="noreferrer"
           target="_blank"

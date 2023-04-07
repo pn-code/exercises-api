@@ -21,6 +21,7 @@ export const exercisesRouter = createTRPCRouter({
   getAll: publicProcedure.query(async ({ ctx }) => {
     const exercises = await ctx.prisma.exercises.findMany({
       take: 100,
+      orderBy: { primaryTarget: "desc" },
     });
 
     const users = (
