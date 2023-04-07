@@ -1,9 +1,13 @@
 import type { User } from "@clerk/nextjs/dist/api";
 import { clerkClient } from "@clerk/nextjs/server";
 import { TRPCError } from "@trpc/server";
-// import { z } from "zod";
+import { z } from "zod";
 
-import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
+import {
+  createTRPCRouter,
+  privateProcedure,
+  publicProcedure,
+} from "~/server/api/trpc";
 
 const filterUserForClient = (user: User) => {
   return {
@@ -41,4 +45,33 @@ export const exercisesRouter = createTRPCRouter({
       };
     });
   }),
+
+  create: privateProcedure
+    .input(
+      z.object({
+        name: z.string().min(4).max(50),
+        description: z.string().min(4).max(255),
+        image: z.string().min(4).max(255),
+        demo: z.string().min(4).max(255),
+        type: z.string().min(4).max(16),
+        primaryTarget: z.string().min(4).max(30),
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
+      const authorId = ctx.currentUser.id;
+
+      const exercise = await ctx.prisma.exercises.create({
+        data: {
+          authorId,
+          name: input.name,
+          description: input.description,
+          image: input.image,
+          demo: input.demo,
+          type: input.type,
+          primaryTarget: input.primaryTarget,
+        },
+      });
+
+      return exercise;
+    }),
 });
