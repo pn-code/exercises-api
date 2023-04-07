@@ -8,33 +8,38 @@ const Home: NextPage = () => {
   return (
     <>
       <Head>
-        <title>Exercise API</title>
-        <meta name="description" content="by pn-code" />
+        <title>Exercise API | Home</title>
+        <meta
+          name="description"
+          content="Comprehensive exercise API for developers"
+        />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="pt-8 flex h-screen flex-col px-2 lg:items-center lg:pt-[12%]">
-        {/* HERO */}
-        <section className="flex w-full flex-col items-center justify-center gap-8 lg:flex-row sm:gap-[10%]">
-          <section className="flex flex-col items-center gap-8">
-            <p className="max-w-xl text-center text-3xl font-semibold lg:text-4xl lg:font-bold">
-              Elevate your fitness game with our intuitive API for resistance
-              and cardiovascular exercises.
-            </p>
-            <Link
-              className=" w-[80%] rounded-lg bg-indigo-900 p-4 text-center text-lg font-semibold hover:bg-indigo-600"
-              href="/"
-            >
-              Get Started
-            </Link>
-          </section>
+      <main className="flex flex-col h-[calc(100vh-200px)] px-2 pt-[7%] gap-8 items-center">
 
-          <Image
-            className="w-full max-w-lg rounded-md mt-4"
-            src={heroImg}
-            alt="exercises-api logo"
-          />
-        </section>
+        <header className="flex flex-col items-center gap-8">
+          <h1 className="text-3xl font-bold text-amber-300 lg:text-5xl">
+            Easily access exercises
+          </h1>
+          <p className="max-w-xl text-center text-lg font-semibold lg:text-xl">
+            Elevate your fitness projects by providing comprehensive resistance
+            and cardiovascular exercises to your users.
+          </p>
+        </header>
+
+        <Image
+          className="w-full max-w-lg rounded-md"
+          src={heroImg}
+          alt="exercises-api logo"
+        />
+
+        <Link
+          className="w-full max-w-[510px] rounded-lg bg-indigo-900 p-4 text-center text-lg font-semibold hover:bg-indigo-600"
+          href="/"
+        >
+          Get Started
+        </Link>
       </main>
     </>
   );
