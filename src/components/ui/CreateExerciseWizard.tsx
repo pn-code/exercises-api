@@ -1,16 +1,11 @@
-import { useUser } from "@clerk/nextjs";
 import React, { useState } from "react";
-import Image from "next/image";
 import { api } from "~/utils/api";
 
 interface Props {
   closeExerciseWizard: () => void;
 }
 
-const CreateExerciseWizard: React.FC<Props> = ({ closeExerciseWizard }) => {
-  const { user } = useUser();
-  if (!user) return null;
-
+const CreateExerciseWizard: React.FC<Props> = ({ closeExerciseWizard}) => {
   // INPUTS
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -34,17 +29,6 @@ const CreateExerciseWizard: React.FC<Props> = ({ closeExerciseWizard }) => {
   return (
     <form className="absolute inset-0 flex h-screen flex-col gap-2 bg-slate-900 px-2 lg:items-center">
       <section className="flex flex-col gap-2 pt-4 lg:pt-4">
-        <section className="flex items-center gap-2">
-          <Image
-            className="rounded-full"
-            width={30}
-            height={30}
-            src={user.profileImageUrl}
-            alt="Profile Image"
-          />
-          <h4>{user.fullName}</h4>
-        </section>
-
         <label htmlFor="name">Exercise Name</label>
         <input
           id="name"

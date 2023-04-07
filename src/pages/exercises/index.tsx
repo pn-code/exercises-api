@@ -17,20 +17,28 @@ const ExercisesPage = () => {
 
   return (
     <main>
-      <header className="flex items-center justify-between my-5 px-4">
+      <header className="my-5 flex items-center justify-between px-4">
         <h2 className="text-3xl">
-          {isSignedIn && openExerciseWizard ? "Create Exercise" : "Exercise List"}
+          {isSignedIn && openExerciseWizard
+            ? "Create Exercise"
+            : "Exercise List"}
         </h2>
         <button
           onClick={() => setOpenExerciseWizard((open) => !open)}
           className="rounded-md bg-indigo-700 p-2 font-semibold hover:bg-indigo-600"
         >
-          {isSignedIn && openExerciseWizard ? "Exercise List" : "Create Exercise"}
+          {isSignedIn && openExerciseWizard
+            ? "Exercise List"
+            : "Create Exercise"}
         </button>
       </header>
 
       <section className="relative z-[999] h-full w-full bg-slate-100">
-        {openExerciseWizard && <CreateExerciseWizard closeExerciseWizard={() => setOpenExerciseWizard(false)}/>}
+        {openExerciseWizard && (
+          <CreateExerciseWizard
+            closeExerciseWizard={() => setOpenExerciseWizard(false)}
+          />
+        )}
       </section>
 
       <Feed />
