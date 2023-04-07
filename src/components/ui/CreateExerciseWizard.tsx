@@ -1,9 +1,13 @@
 import { useUser } from "@clerk/nextjs";
-import React, { ChangeEvent, useState } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import { api } from "~/utils/api";
 
-const CreateExerciseWizard = () => {
+interface Props {
+  closeExerciseWizard: () => void;
+}
+
+const CreateExerciseWizard: React.FC<Props> = ({ closeExerciseWizard }) => {
   const { user } = useUser();
   if (!user) return null;
 
@@ -16,9 +20,14 @@ const CreateExerciseWizard = () => {
   const [demo, setDemo] = useState("");
 
   // Create Function
-  const { mutate } = api.exercises.create.useMutation();
+  const { mutate, isLoading: isCreatingExercise } =
+    api.exercises.create.useMutation({
+      onSuccess: () => {
+        closeExerciseWizard();
+      },
+    });
 
-  const handleExerciseCreation = (e) => {
+  const handleExerciseCreation = () => {
     mutate({ name, description, type, primaryTarget, image, demo });
   };
 
@@ -43,6 +52,7 @@ const CreateExerciseWizard = () => {
           placeholder="Exercise Name"
           value={name}
           onChange={(e) => setName(e.target.value)}
+          disabled={isCreatingExercise}
         />
 
         <label htmlFor="desc">Description</label>
@@ -54,6 +64,7 @@ const CreateExerciseWizard = () => {
           placeholder="Describe exercise..."
           value={description}
           onChange={(e) => setDescription(e.target.value)}
+          disabled={isCreatingExercise}
         />
 
         <label htmlFor="type">Exercise Type</label>
@@ -62,6 +73,7 @@ const CreateExerciseWizard = () => {
           id="type"
           value={type}
           onChange={(e) => setType(e.target.value)}
+          disabled={isCreatingExercise}
         >
           <option value="cardio">Cardiovascular</option>
           <option value="resistance">Resistance</option>
@@ -73,6 +85,7 @@ const CreateExerciseWizard = () => {
           id="primaryTarget"
           value={primaryTarget}
           onChange={(e) => setPrimaryTarget(e.target.value)}
+          disabled={isCreatingExercise}
         >
           <option value="cardio">Cardio</option>
           <option value="neck">Neck</option>
@@ -99,6 +112,7 @@ const CreateExerciseWizard = () => {
           placeholder="Add image url"
           value={image}
           onChange={(e) => setImage(e.target.value)}
+          disabled={isCreatingExercise}
         />
 
         <label htmlFor="">Demo URL</label>
@@ -107,9 +121,16 @@ const CreateExerciseWizard = () => {
           placeholder="Add demo url"
           value={demo}
           onChange={(e) => setDemo(e.target.value)}
+          disabled={isCreatingExercise}
         />
 
-        <button onClick={handleExerciseCreation} className="mt-2 rounded-md bg-indigo-900 p-4">Submit</button>
+        <button
+          onClick={handleExerciseCreation}
+          disabled={isCreatingExercise}
+          className="mt-2 rounded-md bg-indigo-900 p-4"
+        >
+          Submit
+        </button>
       </section>
     </form>
   );

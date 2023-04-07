@@ -30,7 +30,7 @@ const ExercisesPage = () => {
       </header>
 
       <section className="relative z-[999] h-full w-full bg-slate-100">
-        {openExerciseWizard && <CreateExerciseWizard />}
+        {openExerciseWizard && <CreateExerciseWizard closeExerciseWizard={() => setOpenExerciseWizard(false)}/>}
       </section>
 
       <Feed />
