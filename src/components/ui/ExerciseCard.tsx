@@ -24,7 +24,7 @@ const ExerciseCard = (props: ExerciseWithAuthor) => {
         <h2 className="inline text-lg font-semibold">{exercise.name}</h2>
         <p>{exercise.description}</p>
         <a
-          className="underline"
+          className="underline w-20"
           href={exercise.demo}
           rel="noreferrer"
           target="_blank"

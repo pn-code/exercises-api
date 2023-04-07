@@ -17,7 +17,7 @@ const ExercisesPage = () => {
 
   return (
     <main>
-      <header className="flex items-center justify-between">
+      <header className="flex items-center justify-between my-5 px-4">
         <h2 className="text-3xl">
           {isSignedIn && openExerciseWizard ? "Create Exercise" : "Exercise List"}
         </h2>
