@@ -9,7 +9,7 @@ const Feed = () => {
   if (!data) return <div>Something went wrong!</div>;
 
   return (
-    <section>
+    <section className="flex flex-col gap-4">
       {data?.map((exerciseWithAuthor) => (
         <ExerciseCard
           {...exerciseWithAuthor}
