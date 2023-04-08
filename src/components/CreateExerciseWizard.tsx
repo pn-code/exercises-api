@@ -22,7 +22,7 @@ const CreateExerciseWizard: React.FC<Props> = ({ closeExerciseWizard }) => {
       onSuccess: () => {
         closeExerciseWizard();
       },
-      onError: (e) => {
+      onError: () => {
         toast.error("Please make sure all fields are properly filled in.");
       },
     });

@@ -6,7 +6,7 @@ import { getHTTPStatusCodeFromError } from "@trpc/server/http";
 
 const getAllExercisesHandler = async (req: NextApiRequest, res: NextApiResponse) => {
   // Create context and caller
-  const ctx = await createTRPCContext({ req, res });
+  const ctx = createTRPCContext({ req, res });
   const caller = appRouter.createCaller(ctx);
   try {
     const exercises = await caller.exercises.getAll();
